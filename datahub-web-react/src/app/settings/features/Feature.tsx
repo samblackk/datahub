@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { Divider, Typography, Switch, Card } from 'antd';
+import { Divider, Typography, Switch, Card, Button, Tooltip } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { ANTD_GRAY } from '../../entity/shared/constants';
 
@@ -16,12 +16,22 @@ const FeatureRow = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 8px;
 `;
 
 const FeatureOptionRow = styled.div`
     display: flex;
     justify-content: space-between;
+
+    &:not(:last-child) {
+        margin-bottom: 8px;
+    }
+`;
+
+const SettingsOptionRow = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
 
     &:not(:last-child) {
         margin-bottom: 8px;
@@ -82,6 +92,13 @@ export interface FeatureType {
     key: string;
     title: string;
     description: string;
+    settings: Array<{
+        key: string;
+        title: string;
+        isAvailable: boolean;
+        buttonText: string;
+        onClick?: () => void;
+    }>;
     options: Array<{
         key: string;
         title: string;
@@ -94,7 +111,7 @@ export interface FeatureType {
     learnMoreLink?: string;
 }
 
-export const Feature = ({ key, title, description, options, isNew, learnMoreLink }: FeatureType) => (
+export const Feature = ({ key, title, description, settings, options, isNew, learnMoreLink }: FeatureType) => (
     <Card style={{ marginBottom: '1rem' }} key={key}>
         <FeatureRow>
             <div style={{ flex: 1 }}>
@@ -116,6 +133,23 @@ export const Feature = ({ key, title, description, options, isNew, learnMoreLink
                 )}
             </div>
         </FeatureRow>
+        <Divider style={{ margin: `8px 0 24px 0` }} />
+        {settings.map((option) => (
+            <>
+                <SettingsOptionRow key={option.key}>
+                    <span>
+                        <OptionTitle>
+                            <span>{option.title}</span>
+                        </OptionTitle>
+                    </span>
+                    <Tooltip title={option.isAvailable ? '' : 'Only available on DataHub Cloud'}>
+                        <Button onClick={option.onClick} disabled={!option.isAvailable}>
+                            {option.buttonText}
+                        </Button>
+                    </Tooltip>
+                </SettingsOptionRow>
+            </>
+        ))}
         <Card style={{ margin: `16px auto` }}>
             {options.map((option, index) => (
                 <>

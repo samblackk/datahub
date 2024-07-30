@@ -47,6 +47,20 @@ export const Features = () => {
             key: uuidv4(),
             title: 'Documentation Propagation',
             description: 'Automatically propagate documentation from upstream to downstream columns and assets.',
+            settings: [
+                {
+                    key: uuidv4(),
+                    title: 'Rollback Propagation Changes',
+                    isAvailable: false,
+                    buttonText: 'Rollback',
+                },
+                {
+                    key: uuidv4(),
+                    title: 'Backfill existing documentation from upstream to downstream columns/assets',
+                    isAvailable: false,
+                    buttonText: 'Initialize',
+                },
+            ],
             options: [
                 {
                     key: uuidv4(),
@@ -68,23 +82,9 @@ export const Features = () => {
                     isAvailable: false,
                     checked: false,
                 },
-                {
-                    key: uuidv4(),
-                    title: 'Rollback Propagation Changes',
-                    description: 'Rollback documentation changes.',
-                    isAvailable: false,
-                    checked: false,
-                },
-                {
-                    key: uuidv4(),
-                    title: 'Initialize Propagation',
-                    description: 'Backfill existing documentation from upstream to downstream columns/assets.',
-                    isAvailable: false,
-                    checked: false,
-                },
             ],
             isNew: true,
-            learnMoreLink: '#', // TODO: Add URL to Docs page
+            learnMoreLink: 'https://datahubproject.io/docs/automations/doc-propagation',
         },
     ];
 
