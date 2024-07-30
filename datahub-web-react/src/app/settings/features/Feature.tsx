@@ -59,13 +59,13 @@ const OptionTitle = styled(Typography.Text)`
 `;
 
 const learnMoreLinkStyle = {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    color: '#1890FF',
-    fontSize: '12px',
-    cursor: 'pointer',
+	flex: 1,
+	display: 'flex',
+	alignItems: 'center',
+	gap: '8px',
+	color: '#1890FF',
+	fontSize: '12px',
+	cursor: 'pointer',
 };
 
 const NewTag = styled.div`
@@ -78,7 +78,7 @@ const NewTag = styled.div`
     font-size: 12px;
 `;
 
-const DatahubOnlyTag = styled.div`
+const DataHubOnlyTag = styled.div`
     padding: 2px 8px;
 
     border-radius: 24px;
@@ -89,91 +89,91 @@ const DatahubOnlyTag = styled.div`
 `;
 
 export interface FeatureType {
-    key: string;
-    title: string;
-    description: string;
-    settings: Array<{
-        key: string;
-        title: string;
-        isAvailable: boolean;
-        buttonText: string;
-        onClick?: () => void;
-    }>;
-    options: Array<{
-        key: string;
-        title: string;
-        description: string;
-        isAvailable: boolean;
-        checked: boolean;
-        onChange?: (checked: boolean) => void;
-    }>;
-    isNew: boolean;
-    learnMoreLink?: string;
+	key: string;
+	title: string;
+	description: string;
+	settings: Array<{
+		key: string;
+		title: string;
+		isAvailable: boolean;
+		buttonText: string;
+		onClick?: () => void;
+	}>;
+	options: Array<{
+		key: string;
+		title: string;
+		description: string;
+		isAvailable: boolean;
+		checked: boolean;
+		onChange?: (checked: boolean) => void;
+	}>;
+	isNew: boolean;
+	learnMoreLink?: string;
 }
 
 export const Feature = ({ key, title, description, settings, options, isNew, learnMoreLink }: FeatureType) => (
-    <Card style={{ marginBottom: '1rem' }} key={key}>
-        <FeatureRow>
-            <div style={{ flex: 1 }}>
-                <SettingTitle>
-                    <Title level={5} style={{ marginBottom: 0 }}>
-                        {title}
-                    </Title>
-                    {isNew && <NewTag>New!</NewTag>}
-                </SettingTitle>
-                <div>
-                    <Typography.Paragraph type="secondary">{description}</Typography.Paragraph>
-                </div>
-            </div>
-            <div>
-                {learnMoreLink && (
-                    <a href={learnMoreLink} target="_blank" style={learnMoreLinkStyle} rel="noreferrer">
-                        Learn more <ArrowRightOutlined />
-                    </a>
-                )}
-            </div>
-        </FeatureRow>
-        <Divider style={{ margin: `8px 0 24px 0` }} />
-        {settings.map((option) => (
-            <>
-                <SettingsOptionRow key={option.key}>
-                    <span>
-                        <OptionTitle>
-                            <span>{option.title}</span>
-                        </OptionTitle>
-                    </span>
-                    <Tooltip title={option.isAvailable ? '' : 'Only available on DataHub Cloud'}>
-                        <Button onClick={option.onClick} disabled={!option.isAvailable}>
-                            {option.buttonText}
-                        </Button>
-                    </Tooltip>
-                </SettingsOptionRow>
-            </>
-        ))}
-        <Card style={{ margin: `16px auto` }}>
-            {options.map((option, index) => (
-                <>
-                    <FeatureOptionRow key={option.key}>
-                        <span>
-                            <OptionTitle>
-                                <span>{option.title}</span>
-                                {!option.isAvailable && (
-                                    <DatahubOnlyTag>Only available on DataHub Cloud</DatahubOnlyTag>
-                                )}
-                            </OptionTitle>
-                            <div>
-                                <DescriptionText>{option.description}</DescriptionText>
-                            </div>
-                        </span>
-                        <Switch
-                            checked={option.checked}
-                            onChange={(checked) => (option.onChange ? option.onChange(checked) : null)}
-                            disabled={!option.isAvailable}
-                        />
-                    </FeatureOptionRow>
-                    {index !== options.length - 1 && <Divider />}
-                </>
-            ))}
-        </Card>
-    </Card>
+	<Card style={{ marginBottom: '1rem' }} key={key}>
+		<FeatureRow>
+			<div style={{ flex: 1 }}>
+				<SettingTitle>
+					<Title level={5} style={{ marginBottom: 0 }}>
+						{title}
+					</Title>
+					{isNew && <NewTag>New!</NewTag>}
+				</SettingTitle>
+				<div>
+					<Typography.Paragraph type="secondary">{description}</Typography.Paragraph>
+				</div>
+			</div>
+			<div>
+				{learnMoreLink && (
+					<a href={learnMoreLink} target="_blank" style={learnMoreLinkStyle} rel="noreferrer">
+						Learn more <ArrowRightOutlined />
+					</a>
+				)}
+			</div>
+		</FeatureRow>
+		<Divider style={{ margin: `8px 0 24px 0` }} />
+		{settings.map((option) => (
+			<>
+				<SettingsOptionRow key={option.key}>
+					<span>
+						<OptionTitle>
+							<span>{option.title}</span>
+						</OptionTitle>
+					</span>
+					<Tooltip title={option.isAvailable ? '' : 'Only available on DataHub Cloud'}>
+						<Button onClick={option.onClick} disabled={!option.isAvailable}>
+							{option.buttonText}
+						</Button>
+					</Tooltip>
+				</SettingsOptionRow>
+			</>
+		))}
+		<Card style={{ margin: `16px auto` }}>
+			{options.map((option, index) => (
+				<>
+					<FeatureOptionRow key={option.key}>
+						<span>
+							<OptionTitle>
+								<span>{option.title}</span>
+								{!option.isAvailable && (
+									<DataHubOnlyTag>Only available on DataHub Cloud</DataHubOnlyTag>
+								)}
+							</OptionTitle>
+							<div>
+								<DescriptionText>{option.description}</DescriptionText>
+							</div>
+						</span>
+						<Switch
+							checked={option.checked}
+							onChange={(checked) => (option.onChange ? option.onChange(checked) : null)}
+							disabled={!option.isAvailable}
+						/>
+					</FeatureOptionRow>
+					{index !== options.length - 1 && <Divider />}
+				</>
+			))}
+		</Card>
+	</Card>
 );
